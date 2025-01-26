@@ -1,36 +1,49 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { Suspense } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import {
+  Box,
+  Typography,
+  Button,
+  Grid,
+  Card,
+  CardContent,
+  CardActions,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../store/store";
 
-// Lazy load your component
-const LazyComponent = React.lazy(() => import('../components/LazyComponent'));
+const HomePage: React.FC = () => {
+  const { t } = useTranslation();
 
-const Home: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const authdata = useAppSelector((store) => store.auth);
 
-  const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language); // Change the current language
-  };
-  
-  return <Box>
-    <Typography variant="h6">Homepage</Typography>
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        gap: 4,
+        textAlign: "center",
+        p: 3,
+      }}
+    >
+      <Typography variant="h3" component="h1" gutterBottom>
+        {t("home page.welcome")}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        {t("home page.description")}
+      </Typography>
 
-    <Button color="primary" variant="contained">
-      Primary Button
-    </Button>
-
-    <Suspense fallback={<div>Loading...</div>}>
-      <LazyComponent />
-    </Suspense>
-
-    <div>
-      <h1>{t('welcome')}</h1>
-      <p>{t('description')}</p>
-      <button onClick={() => changeLanguage('en')}>English</button>
-      <button onClick={() => changeLanguage('es')}>Español</button>
-      <button onClick={() => changeLanguage('fr')}>Français</button>
-    </div>
-  </Box>;
+      {!authdata.isAuthenticated && (
+        <Button variant="outlined" component={Link} to="/signup">
+          Get Started
+        </Button>
+      )}
+    </Box>
+  );
 };
 
-export default Home;
+export default HomePage;

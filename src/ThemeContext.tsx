@@ -14,14 +14,21 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 export const ThemeContextProvider: FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [mode, setMode] = useState<"light" | "dark">("light");
+  const [mode, setMode] = useState<"light" | "dark">(
+    (localStorage.getItem("darkmode") as "light" | "dark") || "light"
+  );
 
-  const theme = useMemo(() => (mode === "light" ? lightTheme : darkTheme), [
-    mode,
-  ]);
+  const theme = useMemo(
+    () => (mode === "light" ? lightTheme : darkTheme),
+    [mode]
+  );
 
   const toggleTheme = () => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) => {
+      const newMode = prevMode === "light" ? "dark" : "light";
+      localStorage.setItem("darkmode", newMode); // Use the updated mode
+      return newMode;
+    });
   };
 
   return (

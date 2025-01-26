@@ -1,28 +1,30 @@
-import { Box, Stack, Theme, useTheme } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import { createStyles } from "@mui/styles";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import React from "react";
-
-const useStyle = (theme: Theme) => createStyles({
-  root: {
-    backgroundColor: "lightgrey",
-    height: '100vh',
-    width: '100vw',
-    [theme.breakpoints.up('md')]: {
-      backgroundColor: 'lightblue',
-    },
-  },
-});
+import React, { useContext } from "react";
+import styles from "./Basic.module.css";
+import { ThemeContext } from "../ThemeContext";
 
 const Basic: React.FC = () => {
-  const theme = useTheme();
-  const styles = useStyle(theme);
+  const themeContext = useContext(ThemeContext);
+
+  if (!themeContext) {
+    throw new Error("ThemeContext must be used within a ThemeContextProvider");
+  }
+
+  const { mode } = themeContext;
+
   return (
-    <Stack sx={styles.root} direction={"column"} justifyContent={"space-between"}>
+    <Stack
+      className={
+        styles.basicLayout && mode === "light" ? styles.light : styles.dark
+      }
+      direction={"column"}
+      justifyContent={"space-between"}
+    >
       <Header />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ minHeight: "80vh", flexGrow: 1 }}>
         <Outlet />
       </Box>
       <Footer />
