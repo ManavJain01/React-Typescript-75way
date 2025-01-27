@@ -1,0 +1,22 @@
+{
+  "header": {
+    "title": "Système de gestion des stocks",
+    "profile": "Profil",
+    "login": "Se connecter",
+    "signup": "S'inscrire",
+    "logout": "Se déconnecter",
+    "home": "Accueil",
+    "products": "Produits",
+    "warehouses": "Entrepôts"
+  },
+  "home page": {
+    "welcome": "Bienvenue dans",
+    "description": "Gérez efficacement et de manière optimale vos utilisateurs, produits et entrepôts."
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 Système de gestion des stocks. Tous droits réservés.",
+    "contact": "Contactez-nous",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}  

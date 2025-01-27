@@ -17,6 +17,8 @@ import SignUp from "./pages/signup";
 import Login from "./pages/loginpage";
 import NotFoundPage from "./pages/notfoundpage";
 import LazyComponent from "./components/LazyComponent";
+import ProfilePage from "./pages/profilepage";
+import AllUsersPage from "./pages/alluserspage";
 
 const App: React.FC = () => {
   // useSelector
@@ -45,7 +47,34 @@ const App: React.FC = () => {
 
         {/* Private Routes */}
         <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
+          <Route
+            path="/profile"
+            element={
+              <LazyComponent>
+                <ProfilePage />
+              </LazyComponent>
+            }
+          />
 
+          <Route
+            path="/all-users"
+            element={
+              <RoleAuthRoute
+                isAuthenticated={isAuthenticated}
+                userRoles={["ADMIN", "USER", "MANAGER"]}
+                allowedRoles={["ADMIN"]}
+              />
+            }
+          >
+            <Route
+              path=""
+              element={
+                <LazyComponent>
+                  <AllUsersPage />
+                </LazyComponent>
+              }
+            />
+          </Route>
         </Route>
 
         {/* 404 Not Found Route */}

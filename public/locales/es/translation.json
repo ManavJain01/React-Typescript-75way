@@ -1,4 +1,22 @@
 {
-  "welcome": "Bienvenido",
-  "description": "Este es un proyecto React internacionalizado."
+  "header": {
+    "title": "Sistema de Gestión de Inventarios",
+    "profile": "Perfil",
+    "login": "Iniciar sesión",
+    "signup": "Registrarse",
+    "logout": "Cerrar sesión",
+    "home": "Inicio",
+    "products": "Productos",
+    "warehouses": "Almacenes"
+  },
+  "home page": {
+    "welcome": "Bienvenido",
+    "description": "Este es un proyecto React internacionalizado."
+  },
+  "footer": {
+    "copyright": "Copyright © 2025 Sistema de Gestión de Inventarios. Todos los derechos reservados.",
+    "contact": "Contáctanos",
+    "privacy": "Política de privacidad",
+    "terms": "Términos de uso"
+  }
 }

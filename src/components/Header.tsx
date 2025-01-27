@@ -17,6 +17,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { resetTokens, logoutUser } from "../store/reducers/authReducer";
+import { motion } from "framer-motion";
 
 const Header: React.FC = () => {
   // useSelector
@@ -24,7 +25,7 @@ const Header: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  // Context APi
+  // Context API
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
@@ -77,8 +78,14 @@ const Header: React.FC = () => {
           to="/"
           style={{ display: "flex", alignItems: "center", gap: "15px" }}
         >
-          <Logo width={30} height={30} />
-          <Typography variant="h6">Project</Typography>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Logo width={30} height={30} />
+          </motion.div>
+          <Typography variant="h6">My Project</Typography>
         </Link>
 
         <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
@@ -106,22 +113,37 @@ const Header: React.FC = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" color="inherit">
-                Login
-              </Link>
-              <Link to="/signup" color="inherit">
-                Signup
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link to="/login" color="inherit">
+                  Login
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Link to="/signup" color="inherit">
+                  Signup
+                </Link>
+              </motion.div>
             </>
           )}
 
-          <Button variant="contained" onClick={toggleTheme}>
-            {mode === "light" ? (
-              <MdSunny size={20} color={"yellow"} />
-            ) : (
-              <FaMoon size={20} color={"#ffffff"} />
-            )}
-          </Button>
+          <motion.div
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <Button variant="contained" onClick={toggleTheme}>
+              {mode === "light" ? (
+                <MdSunny size={20} color={"yellow"} />
+              ) : (
+                <FaMoon size={20} color={"#ffffff"} />
+              )}
+            </Button>
+          </motion.div>
         </div>
       </Toolbar>
     </AppBar>
